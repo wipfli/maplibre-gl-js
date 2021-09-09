@@ -15,7 +15,7 @@ jobs:
     - name: Remove folder 
       run: git rm -rf ${{ github.event.number }}
     
-    - uses: stefanzweifel/git-auto-commit-action@v4
+    - uses: EndBug/add-and-commit@v7
 
     - name: Add comment
       uses: marocchino/sticky-pull-request-comment@v2
