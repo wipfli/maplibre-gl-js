@@ -5,7 +5,7 @@ on:
     types: [closed]
 
 jobs:
-  build-deploy:
+  delete:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -15,7 +15,12 @@ jobs:
     - name: Remove folder 
       run: git rm -rf ${{ github.event.number }}
     
-    - uses: EndBug/add-and-commit@v7
+    - name: Commit and push
+      run: |
+        git config --global user.name 'bot'
+        git config --global user.email 'email@example.com'
+        git commit -am "Remove ${{ github.event.number }}"
+        git push
 
     - name: Add comment
       uses: marocchino/sticky-pull-request-comment@v2
