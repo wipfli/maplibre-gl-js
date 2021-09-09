@@ -1,4 +1,4 @@
-name: Pull Request Demo
+name: Create Pull Request Demo
 
 on:
   pull_request:

@@ -1,0 +1,27 @@
+name: Delete Pull Request Demo
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: gh-pages
+    
+    - name: Remove folder 
+      run: git rm -rf ${{ github.event.number }}
+    
+    - uses: stefanzweifel/git-auto-commit-action@v4
+
+    - name: Add comment
+      uses: marocchino/sticky-pull-request-comment@v2
+      with:
+        message: |
+          Live demo was deleted.
+
+
+    
