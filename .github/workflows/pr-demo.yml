@@ -33,4 +33,4 @@ jobs:
       uses: marocchino/sticky-pull-request-comment@v2
       with:
         message: |
-          See live demo of this pull request at <https://wipfli.github.io/maplibre-gl-js/${{ github.event.number }}>
+          Live demo of this pull request: <https://wipfli.github.io/maplibre-gl-js/${{ github.event.number }}>
