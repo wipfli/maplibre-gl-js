@@ -10,32 +10,21 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    # - name: Use Node.js 14.x
-    #   uses: actions/setup-node@v2
-    #   with:
-    #     node-version: 14.x
+    - name: Set-up node
+      uses: actions/setup-node@v2
+      with:
+        node-version: 14
 
-    # - name: Build
-    #   run: |
-    #     npm ci
-    #     npm run build-prod-min
-    #     npm run build-css
-    #     cp index.html dist
+    - name: Build
+      run: |
+        npm ci
+        npm run build-prod-min
+        npm run build-css
+        cp index.html dist
 
-    # - name: Find Pull Request number
-    #   uses: jwalton/gh-find-current-pr@v1
-    #   id: findPr
-    #   with:
-    #     state: open
-
-    - name: Show Pull Request number
-      run: echo "Your PR is ${{ github.event.number }}"
-
-    # - name: Deploy
-    #   uses: JamesIves/github-pages-deploy-action@4.1.0
-    #   if: success() && steps.findPr.outputs.number
-    #   with:
-    #     branch: gh-pages
-    #     folder: dist
-    #     target-folder: ${{ steps.findPr.outputs.pr }}
-
+    - name: Deploy
+      uses: JamesIves/github-pages-deploy-action@4.1.0
+      with:
+        branch: gh-pages
+        folder: dist
+        target-folder: ${{ github.event.number }}
