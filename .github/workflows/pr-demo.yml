@@ -1,8 +1,8 @@
 name: Pull Request Demo
 
 on:
-  push:
   pull_request:
+    types: [opened, synchronize]
 
 jobs:
   build-deploy:
