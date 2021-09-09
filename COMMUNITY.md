@@ -23,7 +23,7 @@ majority vote) regarding the direction of all MapLibre projects.
 - Seth Nickell ([Ceres Imaging](https://www.ceresimaging.net))
 - Yuri Astrakhan (individual contributor)
 
-## Notes
+## Notes and so
 
 - The community is currently quite young and informal. We are working towards
   formalizing this structure, including adopting by-laws and forming an
