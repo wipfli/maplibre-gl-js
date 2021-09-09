@@ -19,6 +19,8 @@ Vector tiles are fetched and parsed on WebWorker threads.  "Parsing" a vector ti
 
 ### Rendering with WebGL
 
+## nothing
+
 Once bucket data has been transferred to the main thread, it looks like this:
 
 ```
