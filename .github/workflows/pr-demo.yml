@@ -1,6 +1,7 @@
 name: Pull Request Demo
 
 on:
+  push:
   pull_request:
 
 jobs:
@@ -26,9 +27,14 @@ jobs:
       with:
         state: open
 
-    - name: Deploy
-      uses: JamesIves/github-pages-deploy-action@4.1.0
-      with:
-        branch: gh-pages
-        folder: dist
-        target-folder: ${{ steps.findPr.outputs.pr }}
+    - run: echo "Your PR is ${PR}"
+      if: success() && steps.findPr.outputs.number
+      env:
+        PR: ${{ steps.findPr.outputs.pr }}
+
+    # - name: Deploy
+    #   uses: JamesIves/github-pages-deploy-action@4.1.0
+    #   with:
+    #     branch: gh-pages
+    #     folder: dist
+    #     target-folder: ${{ steps.findPr.outputs.pr }}
