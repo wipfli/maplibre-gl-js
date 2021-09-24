@@ -19,5 +19,5 @@ jobs:
           architecture: x64
       - run: yarn install --frozen-lockfile
       - run: yarn run build-dev
-      - run: xvfb-run -s "-ac -screen 0 1280x1024x24" yarn run test-render debug/overdraw
-      - run: cat test/integration/render-tests/debug/overdraw/map.transform.json
+      - run: xvfb-run -s "-ac -screen 0 1280x1024x24" yarn run test-render line-triangulation/round
+      - run: cat test/integration/render-tests/line-triangulation/round/map.transform.json
