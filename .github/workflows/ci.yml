@@ -19,8 +19,7 @@ jobs:
           architecture: x64
       - run: yarn install --frozen-lockfile
       - run: yarn run build-dev
-      - run: xvfb-run -s "-ac -screen 0 1280x1024x24" yarn run test-render line-triangulation/round
-      - run: xvfb-run -s "-ac -screen 0 1280x1024x24" yarn run test-render debug/overdraw
+      - run: xvfb-run -s "-ac -screen 0 1280x1024x24" yarn run test-render
       - uses: actions/upload-artifact@v2
         with:
           name: my-artifact
