@@ -20,4 +20,8 @@ jobs:
       - run: yarn install --frozen-lockfile
       - run: yarn run build-dev
       - run: xvfb-run -s "-ac -screen 0 1280x1024x24" yarn run test-render line-triangulation/round
-      - run: cat test/integration/render-tests/line-triangulation/round/map.transform.json
+      - run: xvfb-run -s "-ac -screen 0 1280x1024x24" yarn run test-render debug/overdraw
+      - uses: actions/upload-artifact@v2
+        with:
+          name: my-artifact
+          path: test/integration/render-tests/**/map.transform.json
