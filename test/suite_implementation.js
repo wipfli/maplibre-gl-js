@@ -8,6 +8,7 @@ import rtlText from '@mapbox/mapbox-gl-rtl-text';
 import fs from 'fs';
 import path from 'path';
 import customLayerImplementations from './integration/custom_layer_implementations';
+import {inspect} from 'util';
 
 rtlTextPlugin['applyArabicShaping'] = rtlText.applyArabicShaping;
 rtlTextPlugin['processBidirectionalText'] = rtlText.processBidirectionalText;
@@ -118,7 +119,8 @@ module.exports = function(style, options, _callback) { // eslint-disable-line im
                 delete feature.layer;
                 return feature;
             }));
-
+            
+            fs.writeFileSync(path.join(__dirname, 'integration/render-tests', options.id, 'log.txt'), inspect(map), () => console.log('done'));
         });
     });
 
