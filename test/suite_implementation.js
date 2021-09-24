@@ -120,7 +120,7 @@ module.exports = function(style, options, _callback) { // eslint-disable-line im
                 return feature;
             }));
             
-            fs.writeFileSync(path.join(__dirname, 'integration/render-tests', options.id, 'log.txt'), inspect(map), () => console.log('done'));
+            fs.writeFileSync(path.join(__dirname, 'integration/render-tests', options.id, 'map.transform.json'), JSON.stringify(map.transform, null, 4), () => console.log('done'));
         });
     });
 
