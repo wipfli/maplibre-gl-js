@@ -5,6 +5,7 @@ import {
     getImage,
     resetImageRequestQueue
 } from './ajax';
+import * as Ajax from './ajax';
 import config from './config';
 import webpSupported from './webp_supported';
 import {fakeServer, SinonFakeServer} from 'sinon';
@@ -187,21 +188,20 @@ describe('ajax', () => {
         server.respond();
     });
 
-    test('getImage uses HTMLImageElement when ImageBitmap is not supported', done => {
+    test('getImage uses HTMLImageElement when ImageBitmap is not supported', () => {
         resetImageRequestQueue();
+        const mockArrayBufferToImage = jest.spyOn(Ajax, 'arrayBufferToImage');
 
         server.respondWith(request => request.respond(200, {'Content-Type': 'image/png'}, ''));
 
         // mock createImageBitmap not supported
         global.createImageBitmap = undefined;
 
-        getImage({url: ''}, (err, img) => {
-            if (err) done(err);
-            expect(img instanceof HTMLImageElement).toBeTruthy();
-            done();
+        getImage({url: ''}, () => {
         });
 
         server.respond();
+        expect(mockArrayBufferToImage).toHaveBeenCalled();
     });
 
 });

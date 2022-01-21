@@ -295,7 +295,7 @@ function sameOrigin(url) {
 
 const transparentPngUrl = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVQYV2NgAAIAAAUAAarVyFEAAAAASUVORK5CYII=';
 
-function arrayBufferToImage(data: ArrayBuffer, callback: (err?: Error | null, image?: HTMLImageElement | null) => void, cacheControl?: string | null, expires?: string | null) {
+export const arrayBufferToImage = function (data: ArrayBuffer, callback: (err?: Error | null, image?: HTMLImageElement | null) => void, cacheControl?: string | null, expires?: string | null) {
     const img: HTMLImageElement = new Image();
     img.onload = () => {
         callback(null, img);
@@ -311,7 +311,7 @@ function arrayBufferToImage(data: ArrayBuffer, callback: (err?: Error | null, im
     (img as any).cacheControl = cacheControl;
     (img as any).expires = expires;
     img.src = data.byteLength ? URL.createObjectURL(blob) : transparentPngUrl;
-}
+};
 
 function arrayBufferToImageBitmap(data: ArrayBuffer, callback: (err?: Error | null, image?: ImageBitmap | null) => void) {
     const blob: Blob = new Blob([new Uint8Array(data)], {type: 'image/png'});
