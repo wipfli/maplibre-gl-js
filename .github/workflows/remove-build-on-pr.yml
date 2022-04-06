@@ -1,0 +1,29 @@
+name: Remove Build on Pull Request
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  remove-build-on-pull-request:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        ref: gh-pages
+
+    - name: Remove folder 
+      run: git rm -rf ${{ github.event.number }}
+
+    - name: Commit and push
+      run: |
+        git config --global user.name 'bot'
+        git config --global user.email 'email@example.com'
+        git commit -am "Remove ${{ github.event.number }}"
+        git push
+    - name: Add comment
+      uses: marocchino/sticky-pull-request-comment@v2
+      with:
+        header: demo
+        message: |
+          Build was removed from <https://github.com/wipfli/maplibre-gl-js/tree/gh-pages/pulls/>.
