@@ -24,6 +24,6 @@ jobs:
     - name: Add comment
       uses: marocchino/sticky-pull-request-comment@v2
       with:
-        header: demo
+        header: build
         message: |
           Build was removed from <https://github.com/wipfli/maplibre-gl-js/tree/gh-pages/pulls/>.

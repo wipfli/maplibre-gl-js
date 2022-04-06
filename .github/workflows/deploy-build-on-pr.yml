@@ -43,6 +43,6 @@ jobs:
       - name: Add comment
         uses: marocchino/sticky-pull-request-comment@v2
         with:
-          header: demo
+          header: build
           message: |
             Build output available at <https://github.com/wipfli/maplibre-gl-js/tree/gh-pages/pulls/${{ github.event.number }}> and <https://maplibre.org/maplibre-gl-js/pulls/${{ github.event.number }}>.
