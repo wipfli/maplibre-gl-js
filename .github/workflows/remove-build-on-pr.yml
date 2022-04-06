@@ -13,7 +13,7 @@ jobs:
         ref: gh-pages
 
     - name: Remove folder 
-      run: git rm -rf ${{ github.event.number }}
+      run: git rm -rf pulls/${{ github.event.number }}
 
     - name: Commit and push
       run: |
@@ -26,4 +26,4 @@ jobs:
       with:
         header: build
         message: |
-          Build was removed from <https://github.com/wipfli/maplibre-gl-js/tree/gh-pages/pulls/>.
+          Build output was removed from <https://github.com/wipfli/maplibre-gl-js/tree/gh-pages/pulls/>.
