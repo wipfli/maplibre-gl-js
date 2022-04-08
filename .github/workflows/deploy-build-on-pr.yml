@@ -24,6 +24,7 @@ jobs:
           npm run build-css
           npm run build-benchmarks
           npm run generate-typings
+          cp test/integration/pr-demo/index.html dist/index.html
 
       - name: Empty postinstall.js
         run: |
