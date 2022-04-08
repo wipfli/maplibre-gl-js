@@ -1,11 +1,11 @@
-name: Remove Build on Pull Request
+name: Remove PR Demo
 
 on:
   pull_request:
     types: [closed]
 
 jobs:
-  remove-build-on-pull-request:
+  remove-pr-demo:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -24,6 +24,6 @@ jobs:
     - name: Add comment
       uses: marocchino/sticky-pull-request-comment@v2
       with:
-        header: build
+        header: pr-demo
         message: |
-          Build output was removed from <https://github.com/wipfli/maplibre-gl-js/tree/gh-pages/pulls/>.
+          Removed build output and live demo.

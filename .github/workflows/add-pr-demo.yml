@@ -1,11 +1,11 @@
-name: Deploy build on pull request
+name: Add PR Demo
 
 on:
   pull_request:
     types: [opened, synchronize]
 
 jobs:
-  deploy-build-on-pr:
+  add-pr-demo:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -24,6 +24,7 @@ jobs:
           npm run build-css
           npm run build-benchmarks
           npm run generate-typings
+          cp test/integration/pr-demo/index.html dist/index.html
 
       - name: Empty postinstall.js
         run: |
@@ -43,6 +44,6 @@ jobs:
       - name: Add comment
         uses: marocchino/sticky-pull-request-comment@v2
         with:
-          header: build
+          header: pr-demo
           message: |
-            Build output available at <https://github.com/wipfli/maplibre-gl-js/tree/gh-pages/pulls/${{ github.event.number }}> and <https://maplibre.org/maplibre-gl-js/pulls/${{ github.event.number }}>.
+            Uploaded [build output](https://github.com/wipfli/maplibre-gl-js/tree/gh-pages/pulls/${{ github.event.number }}) and created a [live demo](https://maplibre.org/maplibre-gl-js/pulls/${{ github.event.number }}).
