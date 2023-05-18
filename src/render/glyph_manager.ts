@@ -84,15 +84,18 @@ export default class GlyphManager {
 
             glyph = this._tinySDF(entry, stack, id);
 
-            // console.log('glyph_manager', glyph);
+            console.log('glyph_manager', glyph);
 
             if (glyph) {
                 entry.glyphs[id] = glyph;
+                console.log('tinysdf', id, glyph)
                 callback(null, {stack, id, glyph});
                 return;
             }
 
-            const range = Math.floor(id / 256);
+            console.log('glyph done')
+
+            const range = Math.floor((id as any).charCodeAt(0) / 256);
             if (range * 256 > 65535) {
                 callback(new Error('glyphs > 65535 not supported'));
                 return;
@@ -117,8 +120,9 @@ export default class GlyphManager {
                     } | null) => {
                         if (response) {
                             for (const id in response) {
+                                console.log('hello', id, String.fromCharCode(+id), response[+id]);
                                 if (!this._doesCharSupportLocalGlyph(+id)) {
-                                    entry.glyphs[+id] = response[+id];
+                                    entry.glyphs[String.fromCharCode(+id)] = response[+id];
                                 }
                             }
                             entry.ranges[range] = true;
@@ -136,7 +140,14 @@ export default class GlyphManager {
                 if (err) {
                     callback(err);
                 } else if (result) {
-                    callback(null, {stack, id, glyph: result[id] || null});
+                    console.log('hi', id, id.charCodeAt(0), result[id.charCodeAt(0)]);
+                    let glyph = null;
+                    if (result[id.charCodeAt(0)]) {
+                        glyph = {...result[id.charCodeAt(0)]};
+                        glyph.id = id;
+                    }
+                    console.log('glyph is', glyph);
+                    callback(null, {stack, id, glyph: glyph || null});
                 }
             });
         }, (err, glyphs?: Array<{
@@ -164,7 +175,7 @@ export default class GlyphManager {
     }
 
     _doesCharSupportLocalGlyph(id: number): boolean {
-        return true;
+        return !(/^[\x00-\x7F]*$/.test(id as any));
         /* eslint-disable new-cap */
         return !!this.localIdeographFontFamily &&
             (isChar['CJK Unified Ideographs'](id) ||
