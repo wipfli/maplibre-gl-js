@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Index by Graheme</title>
+    <title>Index by Grapheme</title>
     <meta charset='utf-8'>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel='stylesheet' href='../../dist/maplibre-gl.css' />
@@ -53,25 +53,6 @@
                 return res;
             }, {});
 
-            map.addLayer({
-                "id": "line-labels-swissmap",
-                "type": "symbol",
-                "source": "roadnames",
-                "source-layer": "highway",
-                "layout": {
-                    "text-field": ['get', `name${result.language ? (':' + result.language) : ''}`],
-                    "text-font": [
-                        "Fira Sans Regular"
-                    ],
-                    "symbol-placement": "line",
-                    "text-keep-upright": true,
-                },
-                "paint": {
-                    "text-halo-color": "white",
-                    "text-color": "#888",
-                    "text-halo-width": 1.5
-                }
-            });
 
             const pointLabelFirstLine = [
                 'coalesce',

@@ -82,11 +82,10 @@ export default class GlyphManager {
                 return;
             }
 
-            glyph = this._tinySDF(entry, stack, id);
-
             // console.log('glyph_manager', glyph);
 
-            if (glyph) {
+            if (this._doesCharSupportLocalGlyph(id) || id === 'e') {
+                glyph = this._tinySDF(entry, stack, id);
                 entry.glyphs[id] = glyph;
                 // console.log('tinysdf', id, glyph)
                 callback(null, {stack, id, glyph});
@@ -102,8 +101,17 @@ export default class GlyphManager {
             }
 
             if (entry.ranges[range]) {
-                callback(null, {stack, id, glyph});
-                return;
+                console.log('range already loaded', range, 'glyph is', glyph, 'id is', id);
+                if (glyph) {
+                    callback(null, {stack, id, glyph});
+                    return;
+                } else {
+                    glyph = this._tinySDF(entry, stack, id);
+                    entry.glyphs[id] = glyph;
+                    // console.log('tinysdf', id, glyph)
+                    callback(null, {stack, id, glyph});
+                    return;
+                }
             }
 
             if (!this.url) {
@@ -121,8 +129,9 @@ export default class GlyphManager {
                         if (response) {
                             for (const id in response) {
                                 // console.log('hello', id, String.fromCharCode(+id), response[+id]);
-                                if (!this._doesCharSupportLocalGlyph(+id)) {
+                                if (!this._doesCharSupportLocalGlyph(String.fromCharCode(+id) as any)) {
                                     entry.glyphs[String.fromCharCode(+id)] = response[+id];
+                                    // entry.glyphs[String.fromCharCode(+id)].metrics.top -= 4;
                                 }
                             }
                             entry.ranges[range] = true;
@@ -145,9 +154,16 @@ export default class GlyphManager {
                     if (result[id.charCodeAt(0)]) {
                         glyph = {...result[id.charCodeAt(0)]};
                         glyph.id = id;
+                    } else {
+                        console.log('entry is', entry);
+                        glyph = this._tinySDF(entry, stack, id);
+                        entry.glyphs[id] = glyph;
+                        callback(null, {stack, id, glyph});
+                        return;
                     }
-                    // console.log('glyph is', glyph);
+                    console.log('id is', id, 'glyph is', glyph);
                     callback(null, {stack, id, glyph: glyph || null});
+                    return;
                 }
             });
         }, (err, glyphs?: Array<{
@@ -175,13 +191,13 @@ export default class GlyphManager {
     }
 
     _doesCharSupportLocalGlyph(id: number): boolean {
-        return !(/^[\x00-\x7F]*$/.test(id as any));
+        // return !(/^[\x00-\x7F]*$/.test(id as any));
         /* eslint-disable new-cap */
         return !!this.localIdeographFontFamily &&
-            (isChar['CJK Unified Ideographs'](id) ||
-                isChar['Hangul Syllables'](id) ||
-                isChar['Hiragana'](id) ||
-                isChar['Katakana'](id));
+            (isChar['CJK Unified Ideographs']((id as any).charCodeAt(0)) ||
+                isChar['Hangul Syllables']((id as any).charCodeAt(0)) ||
+                isChar['Hiragana']((id as any).charCodeAt(0)) ||
+                isChar['Katakana']((id as any).charCodeAt(0)));
         /* eslint-enable new-cap */
     }
 
@@ -191,9 +207,9 @@ export default class GlyphManager {
             return;
         }
 
-        if (!this._doesCharSupportLocalGlyph(id)) {
-            return;
-        }
+        // if (!this._doesCharSupportLocalGlyph(id)) {
+        //     return;
+        // }
 
         let tinySDF = entry.tinySDF;
         if (!tinySDF) {
