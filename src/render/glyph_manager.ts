@@ -84,7 +84,7 @@ export default class GlyphManager {
 
             // console.log('glyph_manager', glyph);
 
-            if (this._doesCharSupportLocalGlyph(id) || id === 'e') {
+            if (this._doesCharSupportLocalGlyph(id) || id === 'a') {
                 glyph = this._tinySDF(entry, stack, id);
                 entry.glyphs[id] = glyph;
                 // console.log('tinysdf', id, glyph)
@@ -266,7 +266,7 @@ export default class GlyphManager {
          * To approximately align TinySDF glyphs with server-provided glyphs, we use this baseline adjustment
          * factor calibrated to be in between DIN Pro and Arial Unicode (but closer to Arial Unicode)
          */
-        const topAdjustment = 27;
+        const topAdjustment = 25;
 
         return {
             id,
