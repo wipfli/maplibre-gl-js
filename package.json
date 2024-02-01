@@ -43,7 +43,7 @@
     "@rollup/plugin-replace": "^4.0.0",
     "@rollup/plugin-strip": "^2.1.0",
     "@rollup/plugin-typescript": "^8.3.0",
-    "@swc/cli": "^0.1.55",
+    "@swc/cli": "^0.3.5",
     "@swc/core": "^1.2.135",
     "@swc/jest": "^0.2.17",
     "@types/benchmark": "^2.1.1",
