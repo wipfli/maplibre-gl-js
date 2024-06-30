@@ -23,16 +23,13 @@
                 geometryType,
                 featureID,
                 properties}) => {
-
                 if (properties === null) return;
 
                 if ('NAME' in properties) {
                     properties['NAME'] = properties['NAME'].split('').reverse().join('');
                 }
-
             };
-
-            self.setFeaturePropertiesTransform(featurePropertiesTransform);
+            self.WorkerTile.prototype.featurePropertiesTransform = featurePropertiesTransform;
         `;
         const decodedString = decodeURIComponent(transform);
         const blob = new Blob([decodedString], {type: 'application/javascript'});
