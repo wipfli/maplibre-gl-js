@@ -22,7 +22,7 @@
     "@mapbox/whoots-js": "^3.1.0",
     "@types/geojson": "^7946.0.8",
     "csscolorparser": "~1.0.3",
-    "earcut": "^2.2.3",
+    "earcut": "^3.0.0",
     "geojson-vt": "^3.2.1",
     "gl-matrix": "^3.4.3",
     "murmurhash-js": "^1.0.0",
