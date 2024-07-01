@@ -29,7 +29,7 @@
                     properties['NAME'] = properties['NAME'].split('').reverse().join('');
                 }
             };
-            self.WorkerTile.prototype.featurePropertiesTransform = featurePropertiesTransform;
+            self.setFeaturePropertiesTransform(featurePropertiesTransform);
         `;
         const decodedString = decodeURIComponent(transform);
         const blob = new Blob([decodedString], {type: 'application/javascript'});

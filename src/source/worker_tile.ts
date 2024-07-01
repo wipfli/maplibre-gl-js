@@ -63,11 +63,10 @@ export class WorkerTile {
     }
 
     /**
-     * No-Op method to allow overriding it.
-     * @param options 
+     * No-Op method to allow overriding it using `self.setFeaturePropertiesTransform` in the worker context.
+     * @param options - Options to pass to the feature properties tranform function
      */
-    async featurePropertiesTransform(_options: FeaturePropertiesTransformOptions): Promise<void> {
-
+    static async featurePropertiesTransform(_options: FeaturePropertiesTransformOptions): Promise<void> {
     }
 
     async parse(data: VectorTile, layerIndex: StyleLayerIndex, availableImages: Array<string>, actor: IActor): Promise<WorkerTileResult> {
@@ -106,7 +105,7 @@ export class WorkerTile {
             const features = [];
             for (let index = 0; index < sourceLayer.length; index++) {
                 const feature = sourceLayer.feature(index);
-                await this.featurePropertiesTransform({
+                await WorkerTile.featurePropertiesTransform({
                     source: this.source,
                     sourceLayer: sourceLayerId,
                     tileID: this.tileID.toString(),

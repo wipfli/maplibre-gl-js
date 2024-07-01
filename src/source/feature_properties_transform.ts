@@ -34,3 +34,8 @@ export type FeaturePropertiesTransformOptions = {
      */
     properties: { [_: string]: string | number | boolean };
 };
+
+/**
+ * A function that transforms the properties of a vector tile feature.
+ */
+export type FeaturePropertiesTransform = (options: FeaturePropertiesTransformOptions) => Promise<void>
