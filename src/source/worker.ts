@@ -305,5 +305,4 @@ export default class Worker {
 
 if (isWorker(self)) {
     self.worker = new Worker(self);
-    (self as any).WorkerTile = WorkerTile;
 }
