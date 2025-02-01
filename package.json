@@ -74,7 +74,7 @@
     "@types/supercluster": "^7.1.0",
     "@types/window-or-global": "^1.0.4",
     "@typescript-eslint/eslint-plugin": "^5.14.0",
-    "@typescript-eslint/parser": "^5.14.0",
+    "@typescript-eslint/parser": "^8.22.0",
     "address": "^1.1.2",
     "benchmark": "^2.1.4",
     "browserify": "^17.0.0",
